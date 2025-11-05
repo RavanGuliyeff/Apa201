@@ -120,7 +120,62 @@ public class CustomList<T>
 
 
     // -------------------------------delegates-------------------------------------------------------------------------------------
-    
+    public CustomList<T> Where(Func<T, bool> func)
+    {
+        CustomList<T> result = new CustomList<T>();
+        for (int i = 0; i < Count; i++)
+        {
+            if (func(_items[i]))
+                result.Add(_items[i]);
+        }
+        return result;
+    }
+    public void ForEach(Action<T> action)
+    {
+        for (int i = 0; i < Count; i++)
+            action(_items[i]);
+    }
+    public CustomList<T> FindAll(Predicate<T> match)
+    {
+        CustomList<T> result = new CustomList<T>();
+        for (int i = 0; i < Count; i++)
+        {
+            if (match(_items[i]))
+                result.Add(_items[i]);
+        }
+        return result;
+    }
+    public int FindIndex(Predicate<T> match)
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            if (match(_items[i]))
+                return i;
+        }
+
+        return -1;
+    }
+    public bool Exists(Predicate<T> match)
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            if (match(_items[i]))
+                return true;
+        }
+        return false;
+    }
+    public T Find(Predicate<T> match)
+    {
+        for (int i = 0; i < Count; i++)
+        {
+            if (match(_items[i]))
+            {
+                return _items[i];
+            }
+        }
+
+        return default!;
+    }
 
 }
 
