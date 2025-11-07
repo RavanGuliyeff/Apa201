@@ -10,7 +10,7 @@ public class StudentService
 
         string json = JsonConvert.SerializeObject(students, Formatting.Indented);
 
-        using (StreamWriter sw = new StreamWriter(path))
+        using (StreamWriter sw = new StreamWriter(path, false))
         {
             sw.Write(json);
         }
